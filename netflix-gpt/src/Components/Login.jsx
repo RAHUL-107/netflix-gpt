@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Header from './Header'; 
+import {checkValidateData} from '../utils/validation';
 
 const Login = () => {
 
   const [isSignInForm,setisSignInForm]=useState(true);
+
+  const Email = useRef(null);
+  const password = useRef(null);
+
+  const Handlebuttonclick=()=>{
+    //validate 
+    const message=checkValidateData(Email.current.value, password.current.value);
+    console.log(message);
+  };
   const togglesigninform=()=>{
      setisSignInForm(!isSignInForm);
   };
@@ -24,7 +34,7 @@ const Login = () => {
 
       
       <div className="flex justify-center items-center h-full">
-        <form className="bg-black bg-opacity-80 backdrop-blur-sm p-10 rounded-lg w-full max-w-md border border-gray-400">
+        <form onSubmit={(e)=>e.preventDefault()} className="bg-black bg-opacity-80 backdrop-blur-sm p-10 rounded-lg w-full max-w-md border border-gray-400">
           <h2 className="text-3xl font-bold mb-6">{isSignInForm? "SignIn" : "SignUp"}</h2>
 
           {!isSignInForm &&  <input
@@ -34,18 +44,20 @@ const Login = () => {
           />}
 
           <input
+          ref={Email}
             type="text"
             placeholder="Email Address"
             className="w-full p-3 my-3 rounded bg-gray-700 bg-opacity-50 placeholder-gray-300 text-white focus:outline-none"
           />
 
           <input
+          ref={password}
             type="password"
             placeholder="Password"
             className="w-full p-3 my-3 rounded bg-gray-700 bg-opacity-50 placeholder-gray-300 text-white focus:outline-none"
           />
 
-          <button className="w-full bg-red-600 hover:bg-red-700 text-white py-3 my-4 rounded font-semibold">
+          <button className="w-full bg-red-600 hover:bg-red-700 text-white py-3 my-4 rounded font-semibold" onClick={Handlebuttonclick}>
             {isSignInForm? "SignIn" : "SignUp"}
           </button>
 
