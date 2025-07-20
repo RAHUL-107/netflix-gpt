@@ -1,17 +1,20 @@
-import React from 'react'
+import React from 'react';
 
-const VideoTitle = ({title,overview}) => {
+const VideoTitle = ({ title, overview }) => {
   return (
-    <div className='w-screen aspect-video pt-[20%] px-12 absolute text-white bg-gradient-to-r from-black'>
-      <h1 className='text-6xl font-bold'>{title}</h1>
-      <p className='py-6 text-lg w-1/2'>{overview}</p>
-      <div>
-        <button className='bg-gray-500 text-white p-4 px-16 text-lg rounded-lg'>Play</button>
-        <button className='mx-2 bg-gray-500 text-white p-4 px-16 text-lg rounded-lg'>More Info</button>
+    <div className="text-white">
+      <h1 className="text-5xl font-bold">{title}</h1>
+      <p className="py-4 text-lg max-w-xl">{overview}</p>
+      <div className="mt-4">
+        <button className="bg-white text-black py-2 px-6 rounded-md text-lg font-semibold hover:bg-gray-300">
+          ▶ Play
+        </button>
+        <button className="ml-4 bg-gray-700 text-white py-2 px-6 rounded-md text-lg font-semibold hover:bg-gray-600">
+          ℹ More Info
+        </button>
       </div>
     </div>
-    
-  )
-}
+  );
+};
 
-export default VideoTitle
+export default VideoTitle;

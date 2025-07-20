@@ -1,20 +1,28 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import VideoTitle from './VideoTitle'
-import VideoBackground from './VideoBackground'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import VideoBackground from './VideoBackground';
+import VideoTitle from './VideoTitle';
 
-const Maincontainer = () => {
-  const movies = useSelector(store=>store.movies?.nowPlayingmovies);
-  if(!movies)return;
-  const mainMovies = movies[0];
+const MainContainer = () => {
+  const movies = useSelector((store) => store.movies?.nowPlayingMovies);
+  if (!movies || movies.length === 0) return null;
 
-  const{original_title, overview,id}= mainMovies;
+  const mainMovie = movies[0];
+
   return (
-    <div>
-      <VideoTitle title={original_title} overview={overview}/>
-      <VideoBackground movieId={id}/>
-    </div>
-  )
-}
+    <div className="relative w-full aspect-video">
+      {/* Video plays in background */}
+      <VideoBackground movieId={mainMovie.id} />
 
-export default Maincontainer
+      {/* Text sits on top of video */}
+      <div className="absolute top-0 left-0 w-full h-full flex items-center px-12 bg-gradient-to-r from-black z-20">
+        <VideoTitle
+          title={mainMovie.title}
+          overview={mainMovie.overview}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default MainContainer;
